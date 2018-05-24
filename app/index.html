@@ -1,0 +1,123 @@
+<!DOCTYPE html >
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Pokedex</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="img/unnamed.png" type="image/x-icon">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/main.js"></script>
+    <!--<script src="js/directives.js"></script>-->
+    <!--<script src="js/controllers.js"></script>-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body ng-app="pokedex">
+    <header>
+        <div class="header">
+            <div class="header_title">
+                <span>Pokedex</span>
+            </div>
+        </div>
+
+    </header>
+    <section class="content" ng-controller="PokedexController" data-ng-init="GET()" ng-class="{'app-loaded': true}" >
+        <div class="container">
+            <div class="row">
+                <div col-md-12>
+                    <div class="search_container">
+                        <span class="search-title">Enter pokemon types or name</span>
+                        <input type="text" ng-model="search_filter">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="pokedex-wrap">
+                        <div class="pokedex" >
+                            <!--| limitTo:limit-->
+                            <div class="pokedex__item" ng-repeat="pokemon in pokemons | filter : search_filter" ng-click="showMoreStats(pokemon.pkdx_id)">
+                                <div class="pokedex__item__inner">
+                                    <div  ng-include="'partials/pokemon-img.html'"></div>
+                                    <!--<div class="pokedex__item__id">-->
+                                        <!--<span>#{{pokemon.pkdx_id}}</span>-->
+                                    <!--</div>-->
+                                    <div class="pokedex__item__title">
+                                        <h5>{{pokemon.name}}</h5>
+                                    </div>
+                                    <div class="pokedex__item__power">
+                                        <div class="power">
+                                            <div class="power__item {{pokemon.types[0].name}}">{{pokemon.types[0].name}}</div>
+                                            <div class="power__item {{pokemon.types[1].name}}">{{pokemon.types[1].name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="details-wrap" ng-show="isDetail" id="my-div">
+                        <div class="details">
+                            <div class="img">
+                                <img  ng-src="{{poke.sprites.front_default}}"/>
+                            </div>
+                            <div class="poke__title">
+                                <span>{{poke.name}} #{{poke.id}}</span>
+                            </div>
+                            <div class="poke__table">
+                                <table>
+                                    <tr>
+                                        <td>Type</td>
+                                        <td>Fire</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[0].stat.name}}</td>
+                                        <td>{{poke.stats[0].base_stat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[1].stat.name}}</td>
+                                        <td>{{poke.stats[1].base_stat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[2].stat.name}}</td>
+                                        <td>{{poke.stats[2].base_stat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[3].stat.name}}</td>
+                                        <td>{{poke.stats[3].base_stat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[4].stat.name}}</td>
+                                        <td>{{poke.stats[4].base_stat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{{poke.stats[5].stat.name}}</td>
+                                        <td>{{poke.stats[5].base_stat}}</td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="showMore">
+                        <div class="LoadMoreBtn" ng-click="loadMorePokemons();">Load more</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="footer">
+
+    </div>
+
+</body>
+</html>
