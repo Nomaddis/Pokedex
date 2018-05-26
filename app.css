@@ -213,6 +213,12 @@ header {
     border-radius: 4px;
     width: 320px;
 }
+.fixed {
+    position: fixed;
+    top: 10px; /*здесь указываем отступ сверху*/
+    z-index: 9999; /*устанавливаем блок поверх всех элементов на странице*/
+}
+
 
 
 
@@ -254,3 +260,4 @@ header {
     background-color: #313131;
     margin-top: 50px;
 }
+

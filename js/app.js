@@ -25,7 +25,7 @@ app.controller("PokedexController", function ($scope, $http) {
         $http.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
             .then(function (response) {
                 $scope.poke = response.data;
-                console.log($scope.poke);
+                // console.log($scope.poke);
             });
     };
 
