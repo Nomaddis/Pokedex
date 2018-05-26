@@ -47,6 +47,11 @@ header {
     padding: 15px;
     width: 200px;
     margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+.pokedex__item:hover {
+    cursor: pointer;
+    transform: scale(1.05);
 }
 .pokedex__item__inner {
     width: 100%;
