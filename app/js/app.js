@@ -25,7 +25,7 @@ app.controller("PokedexController", function ($scope, $http) {
         $http.get(`https://pokeapi.co/api/v2/pokemon/${id}/`)
             .then(function (response) {
                 $scope.poke = response.data;
-                console.log($scope.poke);
+                // console.log($scope.poke);
             });
     };
 
@@ -41,16 +41,20 @@ app.controller("PokedexController", function ($scope, $http) {
     ajax.pokemonsStok = function(paginationNo) {
         return $http({
             method: 'GET',
-            url: 'https://pokeapi.co/api/v1/pokemon/?limit=12',
-            data: '&offset=' + paginationNo,
+            // urlBase: 'https://pokeapi.co/api/v1/pokemon/?limit=12',
+            url: 'https://pokeapi.co/api/v1/pokemon/?limit=12' + '&offset=' + paginationNo
+            // data: '&offset=' + paginationNo,
         }).then(function(response) {
             return response;
         });
     };
+    $scope.paginationNo = 0;
     $scope.loadMorePokemons = function() {
+        $scope.paginationNo += 12;
         ajax.pokemonsStok($scope.paginationNo).then(function(res) {
+            console.log(res);
             $scope.pokemons = (typeof $scope.pokemons !== 'undefined') ? $scope.pokemons.concat(res.data.objects) : res.data.objects;
-            $scope.paginationNo = $scope.paginationNo + 10;
+            // $scope.paginationNo = $scope.paginationNo + 12;
         });
     };
 

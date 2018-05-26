@@ -2,6 +2,8 @@ var browserSync = require("browser-sync"),
     gulp = require('gulp');
     // path = require('path'),
     reload = browserSync.reload;
+var ghPages = require('gulp-gh-pages');
+
 var config = {
     server: {
         baseDir: "./app"
@@ -20,5 +22,10 @@ gulp.task('watch', ['browser-sync'], function(){
     gulp.watch('app/css/**/*.css', ['autoprefixer', browserSync.reload]);
     // Other watchers
 });
+gulp.task('deploy', function() {
+    return gulp.src('./app/**/*')
+        .pipe(ghPages());
+});
+
 
 gulp.task('default', ['browser-sync', 'watch']);
