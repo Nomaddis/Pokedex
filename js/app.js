@@ -3,6 +3,9 @@
 let app = angular.module('pokedex', []);
 
 app.controller("PokedexController", function ($scope, $http) {
+    //TODO loader for deatils
+    //TODO ajax spinner for "Load more"
+
     /**
      * load pokemons from API
      */
@@ -41,9 +44,7 @@ app.controller("PokedexController", function ($scope, $http) {
     ajax.pokemonsStok = function(paginationNo) {
         return $http({
             method: 'GET',
-            // urlBase: 'https://pokeapi.co/api/v1/pokemon/?limit=12',
             url: 'https://pokeapi.co/api/v1/pokemon/?limit=12' + '&offset=' + paginationNo
-            // data: '&offset=' + paginationNo,
         }).then(function(response) {
             return response;
         });
@@ -54,9 +55,7 @@ app.controller("PokedexController", function ($scope, $http) {
         ajax.pokemonsStok($scope.paginationNo).then(function(res) {
             console.log(res);
             $scope.pokemons = (typeof $scope.pokemons !== 'undefined') ? $scope.pokemons.concat(res.data.objects) : res.data.objects;
-            // $scope.paginationNo = $scope.paginationNo + 12;
         });
     };
-
 
 });
